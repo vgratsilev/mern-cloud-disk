@@ -1,0 +1,71 @@
+{
+  "env": {
+    "commonjs": true,
+    "es6": true,
+    "node": true
+  },
+  "extends": ["airbnb-base", "plugin:node/recommended", "prettier"],
+  "plugins": ["prettier"],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "parserOptions": {
+    "ecmaVersion": 2018
+  },
+  "rules": {
+    "arrow-parens": "warn",
+    "comma-dangle": ["error", "never"],
+    "object-curly-newline": "off",
+    "indent": "off",
+    "quotes": ["error", "single", { "allowTemplateLiterals": true }],
+    "linebreak-style": "off",
+    "operator-linebreak": "off",
+    "no-console": "off",
+    "no-unused-vars": "warn",
+    "no-param-reassign": [
+      "error",
+      {
+        "props": false
+      }
+    ],
+    "no-restricted-imports": [
+      "error",
+      {
+        "paths": [
+          {
+            "name": "lodash",
+            "message": "Don't import from 'lodash' root it will increase bundle's size. Please import as single component instead, like so 'lodash/cloneDeep'"
+          }
+        ],
+        "patterns": ["!lodash/*"]
+      }
+    ],
+    "no-use-before-define": "warn",
+    "no-mixed-operators": "off",
+    "prefer-destructuring": [
+      "error",
+      {
+        "object": true,
+        "array": false
+      }
+    ],
+    "no-underscore-dangle": "error",
+    "prefer-regex-literals": "off",
+    "prettier/prettier": [
+      "error",
+      {
+        "trailingComma": "none",
+        "semi": true,
+        "singleQuote": true,
+        "jsxSingleQuote": true,
+        "endOfLine": "lf",
+        "printWidth": 150,
+        "bracketSpacing": true,
+        "bracketSameLine": false,
+        "useTabs": false,
+        "tabWidth": 4
+      }
+    ]
+  }
+}

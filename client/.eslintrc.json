@@ -1,0 +1,152 @@
+{
+  "root": true,
+  "ignorePatterns": [
+    "/.git",
+    "/.vscode",
+    "/.vs",
+    "/config",
+    "/dist",
+    "/node_modules",
+    "/scripts",
+    "/src/dependencies",
+    "npm-debug.log*",
+    "yarn-debug.log*",
+    "yarn-error.log*"
+  ],
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true
+  },
+  "extends": ["airbnb", "prettier"],
+  "plugins": ["import", "jsx-a11y", "react", "react-hooks", "react-perf", "prettier"],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"],
+        "moduleDirectory:": ["node_modules"],
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    },
+    "css-modules": {
+      "basePath": "src"
+    }
+  },
+  "rules": {
+    "arrow-parens": "warn",
+    "class-methods-use-this": "off",
+    "comma-dangle": ["error", "never"],
+    "css-modules/no-unused-class": "off",
+    "object-curly-newline": "off",
+    "indent": "off",
+    "quotes": ["error", "single", { "allowTemplateLiterals": true }],
+    "jsx-quotes": ["error", "prefer-single"],
+    "jsx-a11y/no-noninteractive-tabindex": "off",
+    "jsx-a11y/label-has-associated-control": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "linebreak-style": "off",
+    "operator-linebreak": "off",
+    "no-console": [
+      "error",
+      {
+        "allow": ["error"]
+      }
+    ],
+    "no-unused-vars": "warn",
+    "no-param-reassign": [
+      "error",
+      {
+        "props": false
+      }
+    ],
+    "no-restricted-imports": [
+      "error",
+      {
+        "paths": [
+          {
+            "name": "lodash",
+            "message": "Don't import from 'lodash' root it will increase bundle's size. Please import as single component instead, like so 'lodash/cloneDeep'"
+          }
+        ],
+        "patterns": ["!lodash/*"]
+      }
+    ],
+    "no-plusplus": "off",
+    "max-len": [
+      "warn",
+      {
+        "code": 150,
+        "comments": 150,
+        "tabWidth": 4,
+        "ignoreUrls": true,
+        "ignoreRegExpLiterals": true
+      }
+    ],
+    "max-classes-per-file": "warn",
+    "no-use-before-define": "warn",
+    "no-mixed-operators": "off",
+    "prefer-destructuring": [
+      "error",
+      {
+        "object": true,
+        "array": false
+      }
+    ],
+    "react/sort-comp": "off",
+    "react/jsx-wrap-multilines": "warn",
+    "react/jsx-indent": "off",
+    "react/jsx-indent-props": "off",
+    "react/jsx-boolean-value": ["error", "always"],
+    "react/jsx-filename-extension": [
+      "off",
+      {
+        "extensions": [".js", ".jsx"]
+      }
+    ],
+    "react/jsx-curly-brace-presence": [
+      "error",
+      {
+        "props": "always",
+        "children": "ignore"
+      }
+    ],
+    "react/jsx-no-bind": "error",
+    "react-perf/jsx-no-new-object-as-prop": "error",
+    "react-perf/jsx-no-new-array-as-prop": "error",
+    "react/jsx-props-no-spreading": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/function-component-definition": "off",
+    "react/jsx-no-useless-fragment": [
+      "error",
+      {
+        "allowExpressions": true
+      }
+    ],
+    "react/no-unstable-nested-components": [
+      "error",
+      {
+        "allowAsProps": true
+      }
+    ],
+    "react/no-unused-class-component-methods": "off",
+    "react/forbid-prop-types": "off",
+    "import/prefer-default-export": "off",
+    "no-underscore-dangle": "error",
+    "prefer-regex-literals": "off",
+    "prettier/prettier": [
+      "error",
+      {
+        "trailingComma": "none",
+        "semi": true,
+        "singleQuote": true,
+        "jsxSingleQuote": true,
+        "endOfLine": "lf",
+        "printWidth": 150,
+        "bracketSpacing": true,
+        "bracketSameLine": false,
+        "useTabs": false,
+        "tabWidth": 4
+      }
+    ]
+  }
+}
