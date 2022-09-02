@@ -27,9 +27,6 @@
         "moduleDirectory:": ["node_modules"],
         "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
-    },
-    "css-modules": {
-      "basePath": "src"
     }
   },
   "rules": {
