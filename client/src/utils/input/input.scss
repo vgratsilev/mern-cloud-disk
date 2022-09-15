@@ -1,0 +1,34 @@
+@import 'utils/colors';
+
+input {
+    border: none;
+    border-bottom: var(--font-color) solid 3px;
+    background: transparent;
+    width: 100%;
+    padding: 3px;
+    &:focus {
+        outline: none;
+        transform: scale(1.01);
+    }
+}
+
+::-webkit-input-placeholder {
+    /* Chrome */
+    color: var(--font-color);
+    font-weight: 700;
+}
+:-ms-input-placeholder {
+    /* IE 10+ */
+    color: var(--font-color);
+    font-weight: 700;
+}
+::-moz-placeholder {
+    /* Firefox 19+ */
+    color: var(--font-color);
+    font-weight: 700;
+}
+:-moz-placeholder {
+    /* Firefox 4 - 18 */
+    color: var(--font-color);
+    font-weight: 700;
+}
