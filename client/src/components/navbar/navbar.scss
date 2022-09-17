@@ -1,5 +1,10 @@
 @import 'utils/colors';
 
+@mixin menu-item-auth {
+    margin-left: auto;
+    margin-right: 20px;
+}
+
 .navbar {
     display: flex;
     height: 50px;
@@ -14,8 +19,12 @@
     }
 
     &__login {
-        margin-left: auto;
-        margin-right: 20px;
+        @include menu-item-auth;
+    }
+
+    &__logout {
+        @include menu-item-auth;
+        cursor: pointer;
     }
 }
 
@@ -23,4 +32,8 @@
     width: 1140px;
     display: flex;
     align-items: center;
+
+    .home-link {
+        display: flex;
+    }
 }

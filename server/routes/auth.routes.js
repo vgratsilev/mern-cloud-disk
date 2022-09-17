@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const config = require('config');
 
 const User = require('../models/User');
+const authMiddleware = require('../middleware/auth.middleware');
 
 const router = new Router();
 
@@ -54,6 +55,26 @@ router.post('/login', async (request, response) => {
         }
         const token = jwt.sign({ id: user.id }, config.get('secretKey'), { expiresIn: '1h' });
 
+        return response.json({
+            token,
+            user: {
+                id: user.id,
+                email: user.email,
+                diskSpace: user.diskSpace,
+                userSpace: user.usedSpace,
+                avatar: user.avatar
+            }
+        });
+    } catch (error) {
+        console.log(error);
+        return response.send({ message: 'Server Error' });
+    }
+});
+
+router.get('/auth', authMiddleware, async (request, response) => {
+    try {
+        const user = await User.findOne({ _id: request.user.id });
+        const token = jwt.sign({ id: user.id }, config.get('secretKey'), { expiresIn: '1h' });
         return response.json({
             token,
             user: {

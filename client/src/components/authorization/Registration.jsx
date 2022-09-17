@@ -1,18 +1,18 @@
 import { registration } from 'actions/user';
 import { useState } from 'react';
 import Input from 'utils/input/Input';
-import './registration.scss';
+import './authorization.scss';
 
 const Registration = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     return (
-        <div className={'registration'}>
-            <div className={'registration__header'}>Registration</div>
+        <div className={'authorization'}>
+            <div className={'authorization__header'}>Registration</div>
             <Input value={email} setValue={setEmail} placeholder={'Enter email...'} />
             <Input value={password} setValue={setPassword} type={'password'} placeholder={'Enter password...'} />
-            <button type={'button'} className={'registration__btn'} onClick={() => registration(email, password)}>
+            <button type={'button'} className={'authorization__btn'} onClick={() => registration(email, password)}>
                 Register
             </button>
         </div>
