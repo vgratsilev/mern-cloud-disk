@@ -1,0 +1,15 @@
+.disk {
+    margin-top: 20px;
+
+    &__buttons {
+        display: flex;
+
+        button {
+            padding: 5px;
+        }
+
+        &__createFolder {
+            margin-left: 10px;
+        }
+    }
+}
