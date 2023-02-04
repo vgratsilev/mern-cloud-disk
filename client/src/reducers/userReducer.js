@@ -3,7 +3,7 @@ const LOGOUT = 'LOGOUT';
 
 const initialState = {
     currentUser: {},
-    isAuth: false
+    isAuth: false,
 };
 
 export default function userReducer(state = initialState, action = {}) {
@@ -12,14 +12,14 @@ export default function userReducer(state = initialState, action = {}) {
             return {
                 ...state,
                 currentUser: action.payload,
-                isAuth: true
+                isAuth: true,
             };
         case LOGOUT:
             localStorage.removeItem('token');
             return {
                 ...state,
                 currentUser: {},
-                isAuth: false
+                isAuth: false,
             };
         default:
             return state;
