@@ -11,8 +11,15 @@ const Navbar = () => {
     return (
         <div className={'navbar'}>
             <div className={'container'}>
-                <NavLink to={'/'} className={'home-link'}>
-                    <img src={Logo} alt={''} className={'navbar__logo'} />
+                <NavLink
+                    to={'/'}
+                    className={'home-link'}
+                >
+                    <img
+                        src={Logo}
+                        alt={''}
+                        className={'navbar__logo'}
+                    />
                     <div className={'navbar__header'}>MERN Cloud</div>
                 </NavLink>
                 {!isAuth && (
@@ -27,7 +34,12 @@ const Navbar = () => {
                     </>
                 )}
                 {isAuth && (
-                    <div className={'navbar__logout'} role={'menuitem'} tabIndex={0} onClick={() => dispatch(logoutUser())}>
+                    <div
+                        className={'navbar__logout'}
+                        role={'menuitem'}
+                        tabIndex={0}
+                        onClick={() => dispatch(logoutUser())}
+                    >
                         Sign Out
                     </div>
                 )}

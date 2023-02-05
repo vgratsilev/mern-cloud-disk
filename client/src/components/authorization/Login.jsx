@@ -12,9 +12,22 @@ const Login = () => {
     return (
         <div className={'authorization'}>
             <div className={'authorization__header'}>Login</div>
-            <Input value={email} setValue={setEmail} placeholder={'Enter email...'} />
-            <Input value={password} setValue={setPassword} type={'password'} placeholder={'Enter password...'} />
-            <button type={'button'} className={'authorization__btn'} onClick={() => dispatch(login(email, password))}>
+            <Input
+                value={email}
+                setValue={setEmail}
+                placeholder={'Enter email...'}
+            />
+            <Input
+                value={password}
+                setValue={setPassword}
+                type={'password'}
+                placeholder={'Enter password...'}
+            />
+            <button
+                type={'button'}
+                className={'authorization__btn'}
+                onClick={() => dispatch(login(email, password))}
+            >
                 Login
             </button>
         </div>

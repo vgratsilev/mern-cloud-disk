@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getFiles } from '../../actions/file';
+import { getFiles } from 'actions/file';
+import { setShowPopup } from 'reducers/fileReducer';
 import FileList from './fileList/FileList';
+import Popup from './Popup/Popup';
 import './disk.scss';
 
 const getCurrentDir = (state) => state.files.currentDir;
@@ -13,6 +15,10 @@ const Disk = () => {
     useEffect(() => {
         dispatch(getFiles(currentDir));
     }, [dispatch, currentDir]);
+
+    const showPopupHandler = () => {
+        dispatch(setShowPopup(true));
+    };
 
     return (
         <div className={'disk'}>
@@ -26,11 +32,13 @@ const Disk = () => {
                 <button
                     className={'disk__buttons__createFolder'}
                     type={'button'}
+                    onClick={showPopupHandler}
                 >
                     Create folder
                 </button>
             </div>
             <FileList />
+            <Popup />
         </div>
     );
 };
