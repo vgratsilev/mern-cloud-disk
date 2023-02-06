@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import Navbar from 'components/navbar/Navbar';
 import Login from 'components/authorization/Login';
 import Registration from 'components/authorization/Registration';
-import Home from 'components/home/Home';
+// import Home from 'components/home/Home';
 
 import './app.scss';
 

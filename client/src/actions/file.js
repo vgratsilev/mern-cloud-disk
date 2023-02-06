@@ -33,7 +33,7 @@ export function createDir(dirID, name) {
             );
             dispatch(addFile(response.data));
         } catch (e) {
-            alert(e.response.data.message);
+            alert(e.response?.data?.message);
         }
     };
 }

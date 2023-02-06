@@ -1,4 +1,4 @@
-@import "../../../utils/colors";
+@import '../../../utils/colors';
 
 .file {
     margin: 10px 0;
@@ -6,6 +6,7 @@
     display: grid;
     grid-template-columns: 1fr 4fr repeat(4, 1fr);
     align-items: center;
+    cursor: pointer;
 
     &:hover {
         transform: scale(1.02);
