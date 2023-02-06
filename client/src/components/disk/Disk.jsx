@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFiles } from 'actions/file';
-import { setShowPopup } from 'reducers/fileReducer';
+import { popFromStack, setShowPopup } from 'reducers/fileReducer';
 import FileList from './fileList/FileList';
 import Popup from './Popup/Popup';
 import './disk.scss';
@@ -20,15 +20,22 @@ const Disk = () => {
         dispatch(setShowPopup(true));
     };
 
+    const backBtnHandler = () => {
+        dispatch(popFromStack());
+    };
+
     return (
         <div className={'disk'}>
             <div className={'disk__buttons'}>
-                <button
-                    className={'disk__buttons_back'}
-                    type={'button'}
-                >
-                    Back
-                </button>
+                {currentDir && (
+                    <button
+                        className={'disk__buttons_back'}
+                        type={'button'}
+                        onClick={backBtnHandler}
+                    >
+                        Back
+                    </button>
+                )}
                 <button
                     className={'disk__buttons__createFolder'}
                     type={'button'}
