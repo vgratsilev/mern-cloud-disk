@@ -60,7 +60,7 @@
         "array": false
       }
     ],
-    "no-underscore-dangle": "error",
+    "no-underscore-dangle": "off",
     "prefer-regex-literals": "off",
     "prettier/prettier": [
       "error",
