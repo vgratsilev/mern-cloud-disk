@@ -20,7 +20,7 @@ const FileList = () => {
                 <div className={'fileList__header__date'}>Date</div>
                 <div className={'fileList__header__size'}>Size</div>
             </div>
-            {files}
+            {files.length === 0 ? <span>{'Folder is empty'}</span> : files}
         </div>
     );
 };
