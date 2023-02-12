@@ -1,5 +1,7 @@
 import IconDir from 'assets/img/dir.svg';
 import IconFile from 'assets/img/file.svg';
+import IconDownload from 'assets/img/download.svg';
+import IconDelete from 'assets/img/trash.svg';
 import { useDispatch } from 'react-redux';
 import { pushToStack, setCurrentDir } from 'reducers/fileReducer';
 import { downloadFile } from 'actions/file';
@@ -39,15 +41,23 @@ const File = (props) => {
                     type={'button'}
                     className={'file__button file__download'}
                     onClick={downloadFileHandler}
+                    title={'Download file'}
                 >
-                    Download
+                    <img
+                        src={IconDownload}
+                        alt={'Download file'}
+                    />
                 </button>
             )}
             <button
                 type={'button'}
                 className={'file__button file__delete'}
+                title={'Delete file'}
             >
-                Delete
+                <img
+                    src={IconDelete}
+                    alt={'Delete file'}
+                />
             </button>
         </div>
     );
