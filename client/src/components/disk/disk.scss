@@ -10,6 +10,7 @@
 
         button {
             padding: 5px;
+            cursor: pointer;
         }
 
         &__createFolder {
@@ -22,6 +23,10 @@
         padding: 5px 10px;
         cursor: pointer;
         margin-left: 10px;
+
+        &:hover {
+            opacity: 0.8;
+        }
     }
 
     &__upload_input {

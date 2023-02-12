@@ -37,6 +37,11 @@
         border: 1px solid var(--font-color);
         border-radius: 37px;
         justify-self: center;
+        cursor: pointer;
+
+        &:hover {
+            opacity: 0.8;
+        }
     }
 
     &:hover &__date {
