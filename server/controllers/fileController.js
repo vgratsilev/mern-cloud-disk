@@ -75,8 +75,22 @@ class FileController {
 
             return response.json(dbFile);
         } catch (error) {
-            console.log('Upload Error', error);
-            return response.status(500).json({ message: 'Upload error' });
+            console.log('Upload file Error', error);
+            return response.status(500).json({ message: 'Upload file error' });
+        }
+    }
+
+    static async downloadFile(request, response) {
+        try {
+            const file = await File.findOne({ _id: request.query.id, user: request.user.id });
+            const filePath = path.join(__dirname, `../files/${request.user.id}/${file.path}/${file.name}`);
+            if (!fs.existsSync(filePath)) {
+                return response.status(400).json({ message: 'Error: file not found' });
+            }
+            return response.download(filePath, file.name);
+        } catch (error) {
+            console.log('Download file Error', error);
+            return response.status(500).json({ message: 'Download file error' });
         }
     }
 }

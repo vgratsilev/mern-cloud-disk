@@ -2,6 +2,7 @@ import IconDir from 'assets/img/dir.svg';
 import IconFile from 'assets/img/file.svg';
 import { useDispatch } from 'react-redux';
 import { pushToStack, setCurrentDir } from 'reducers/fileReducer';
+import { downloadFile } from 'actions/file';
 import './file.scss';
 
 const File = (props) => {
@@ -13,6 +14,11 @@ const File = (props) => {
             dispatch(setCurrentDir(file._id));
             dispatch(pushToStack(file._id));
         }
+    };
+
+    const downloadFileHandler = (event) => {
+        event.stopPropagation();
+        downloadFile(file);
     };
 
     return (
@@ -28,6 +34,21 @@ const File = (props) => {
             <div className={'file__name'}>{file.name}</div>
             <div className={'file__date'}>{file.date?.slice(0, 10)}</div>
             <div className={'file__size'}>{file.size}</div>
+            {file.type !== 'dir' && (
+                <button
+                    type={'button'}
+                    className={'file__button file__download'}
+                    onClick={downloadFileHandler}
+                >
+                    Download
+                </button>
+            )}
+            <button
+                type={'button'}
+                className={'file__button file__delete'}
+            >
+                Delete
+            </button>
         </div>
     );
 };
