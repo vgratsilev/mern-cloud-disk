@@ -4,7 +4,7 @@ import IconDownload from 'assets/img/download.svg';
 import IconDelete from 'assets/img/trash.svg';
 import { useDispatch } from 'react-redux';
 import { pushToStack, setCurrentDir } from 'reducers/fileReducer';
-import { downloadFile } from 'actions/file';
+import { deleteFile, downloadFile } from 'actions/file';
 import './file.scss';
 
 const File = (props) => {
@@ -21,6 +21,11 @@ const File = (props) => {
     const downloadFileHandler = (event) => {
         event.stopPropagation();
         downloadFile(file);
+    };
+
+    const deleteFileHandler = (event) => {
+        event.stopPropagation();
+        dispatch(deleteFile(file));
     };
 
     return (
@@ -52,6 +57,7 @@ const File = (props) => {
             <button
                 type={'button'}
                 className={'file__button file__delete'}
+                onClick={deleteFileHandler}
                 title={'Delete file'}
             >
                 <img

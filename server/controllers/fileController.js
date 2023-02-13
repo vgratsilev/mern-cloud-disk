@@ -4,6 +4,19 @@ const FileService = require('../services/fileService');
 const File = require('../models/File');
 const User = require('../models/User');
 
+function getPath(file) {
+    return path.join(__dirname, `../files/${file.user}/${file.path}`);
+}
+
+function deleteFileNode(file) {
+    const filePath = getPath(file);
+    if (file.type === 'dir') {
+        fs.rmdirSync(filePath);
+    } else {
+        fs.unlinkSync(filePath);
+    }
+}
+
 class FileController {
     static async createDir(request, response) {
         try {
@@ -61,11 +74,15 @@ class FileController {
             await file.mv(filePath);
 
             const type = file.name.split('.').pop();
+            let fPath = file.name;
+            if (parent) {
+                fPath = `${parent.path}/${file.name}`;
+            }
             const dbFile = new File({
                 name: file.name,
                 type,
                 size: file.size,
-                path: parent?.path,
+                path: fPath,
                 parent: parent?._id,
                 user: user._id
             });
@@ -75,7 +92,7 @@ class FileController {
 
             return response.json(dbFile);
         } catch (error) {
-            console.log('Upload file Error', error);
+            console.log('Upload file error', error);
             return response.status(500).json({ message: 'Upload file error' });
         }
     }
@@ -83,14 +100,37 @@ class FileController {
     static async downloadFile(request, response) {
         try {
             const file = await File.findOne({ _id: request.query.id, user: request.user.id });
-            const filePath = path.join(__dirname, `../files/${request.user.id}/${file.path}/${file.name}`);
+            const filePath = path.join(__dirname, `../files/${request.user.id}/${file.path}`);
             if (!fs.existsSync(filePath)) {
                 return response.status(400).json({ message: 'Error: file not found' });
             }
             return response.download(filePath, file.name);
         } catch (error) {
-            console.log('Download file Error', error);
+            console.log('Download file error', error);
             return response.status(500).json({ message: 'Download file error' });
+        }
+    }
+
+    static async deleteFile(request, response) {
+        try {
+            const file = await File.findOne({ _id: request.query.id, user: request.user.id });
+            const user = await User.findOne({ _id: request.user.id });
+
+            if (!file) {
+                return response.status(400).json({ message: 'Error: file not found' });
+            }
+
+            deleteFileNode(file);
+            await file.remove();
+            user.usedSpace -= file.size;
+            return response.json({ message: 'File deleted' });
+        } catch (error) {
+            if (error.code === 'ENOTEMPTY') {
+                console.log('Delete folder error: folder not empty', error);
+                return response.status(500).json({ message: 'Delete folder error: folder is not empty' });
+            }
+            console.log('Delete file error', error);
+            return response.status(500).json({ message: 'Delete file error' });
         }
     }
 }
