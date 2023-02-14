@@ -5,6 +5,7 @@ import { popFromStack, setShowPopup } from 'reducers/fileReducer';
 import FileList from './fileList/FileList';
 import Popup from './Popup/Popup';
 import './disk.scss';
+import Uploader from './uploader/Uploader';
 
 const getCurrentDir = (state) => state.files.currentDir;
 
@@ -101,6 +102,7 @@ const Disk = () => {
             </div>
             <FileList />
             <Popup />
+            <Uploader />
         </div>
     );
 };

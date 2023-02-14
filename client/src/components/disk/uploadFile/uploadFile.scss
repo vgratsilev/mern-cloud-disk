@@ -1,0 +1,45 @@
+@import '../../../utils/colors';
+
+.upload-file {
+    background-color: var(--background-color);
+    border-radius: 8px;
+    margin: 5px 0;
+    padding: 5px 10px;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &__name {
+            font-size: 1.1rem;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        &__remove {
+            padding: 2px;
+        }
+    }
+
+    &__progress-bar {
+        height: 1rem;
+        border-radius: 8px;
+        background-color: var(--font-color);
+        display: flex;
+        margin: 3px 0;
+
+        &__upload-bar {
+            background-color: green;
+            width: 0;
+            border-radius: 8px;
+        }
+
+        &__percent {
+            color: var(--background-color);
+            left: 50%;
+            position: absolute;
+        }
+    }
+}

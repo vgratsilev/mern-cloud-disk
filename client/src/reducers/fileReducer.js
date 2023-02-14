@@ -29,12 +29,12 @@ export default function fileReducer(state = initialState, action = {}) {
         case POP_FROM_STACK: {
             const prevDir = state.dirStack.at(-2) || null;
             const stack = state.dirStack.slice(0, -1);
-            return { ...state, dirStack: [...stack], currentDir: prevDir };
+            return { ...state, dirStack: stack, currentDir: prevDir };
         }
         case DELETE_FILE:
             return {
                 ...state,
-                files: [...state.files.filter((file) => file._id !== action.payload)],
+                files: state.files.filter((file) => file._id !== action.payload),
             };
         default:
             return state;

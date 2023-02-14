@@ -1,0 +1,27 @@
+@import '../../../utils/colors';
+
+.uploader {
+    height: 300px;
+    width: 300px;
+    position: fixed;
+    background-color: var(--font-color);
+    bottom: 0;
+    right: 0;
+    padding: 20px;
+    border-radius: 12px 0 0 0;
+    overflow-y: auto;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+
+        &__title {
+            color: var(--background-color);
+            font-size: 1.2rem;
+        }
+
+        &__close {
+            padding: 3px;
+        }
+    }
+}
