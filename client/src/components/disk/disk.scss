@@ -32,6 +32,16 @@
     &__upload_input {
         display: none;
     }
+
+    &__sort {
+        &_label {
+            margin-left: 20px;
+        }
+
+        &_select {
+            margin-left: 10px;
+        }
+    }
 }
 
 .drop-area {

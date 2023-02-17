@@ -13,10 +13,11 @@ const Disk = () => {
     const dispatch = useDispatch();
     const [dragEnter, setDragEnter] = useState(false);
     const currentDir = useSelector(getCurrentDir);
+    const [sort, setSort] = useState('type');
 
     useEffect(() => {
-        dispatch(getFiles(currentDir));
-    }, [dispatch, currentDir]);
+        dispatch(getFiles(currentDir, sort));
+    }, [dispatch, currentDir, sort]);
 
     const showPopupHandler = () => {
         dispatch(setShowPopup(true));
@@ -47,6 +48,10 @@ const Disk = () => {
         const files = [...event.dataTransfer.files];
         files.forEach((file) => dispatch(uploadFile(file, currentDir)));
         setDragEnter(false);
+    };
+
+    const sortValueChangeHandler = (e) => {
+        setSort(e.target.value);
     };
 
     if (dragEnter) {
@@ -99,6 +104,19 @@ const Disk = () => {
                         />
                     </label>
                 </div>
+                <label className={'disk__sort_label'}>
+                    Sort
+                    <select
+                        className={'disk__sort_select'}
+                        value={sort}
+                        onChange={sortValueChangeHandler}
+                        title={'Sort'}
+                    >
+                        <option value={'name'}>by name</option>
+                        <option value={'type'}>by type</option>
+                        <option value={'date'}>by date</option>
+                    </select>
+                </label>
             </div>
             <FileList />
             <Popup />
