@@ -8,11 +8,13 @@ import './disk.scss';
 import Uploader from './uploader/Uploader';
 
 const getCurrentDir = (state) => state.files.currentDir;
+const getIsLoading = (state) => state.app.isLoading;
 
 const Disk = () => {
     const dispatch = useDispatch();
     const [dragEnter, setDragEnter] = useState(false);
     const currentDir = useSelector(getCurrentDir);
+    const isLoading = useSelector(getIsLoading);
     const [sort, setSort] = useState('type');
 
     useEffect(() => {
@@ -53,6 +55,10 @@ const Disk = () => {
     const sortValueChangeHandler = (e) => {
         setSort(e.target.value);
     };
+
+    if (isLoading) {
+        return <div className={'loader'}>Loading...</div>;
+    }
 
     if (dragEnter) {
         return (
