@@ -6,6 +6,7 @@ import FileList from './fileList/FileList';
 import Popup from './Popup/Popup';
 import './disk.scss';
 import Uploader from './uploader/Uploader';
+import { Loader } from '../Loader/Loader';
 
 const getCurrentDir = (state) => state.files.currentDir;
 const getIsLoading = (state) => state.app.isLoading;
@@ -57,7 +58,11 @@ const Disk = () => {
     };
 
     if (isLoading) {
-        return <div className={'loader'}>Loading...</div>;
+        return (
+            <div className={'loader'}>
+                <Loader />
+            </div>
+        );
     }
 
     if (dragEnter) {

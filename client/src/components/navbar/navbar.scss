@@ -1,4 +1,5 @@
 @import 'utils/colors';
+@import 'utils/sizes';
 
 @mixin menu-item-auth {
     margin-left: auto;
@@ -7,7 +8,7 @@
 
 .navbar {
     display: flex;
-    height: 50px;
+    height: var(--navbar-height);
     justify-content: center;
     background-color: white;
     width: 100%;
