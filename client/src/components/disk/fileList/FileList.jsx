@@ -9,6 +9,10 @@ const getFilesSelector = (state) => state.files.files;
 const FileList = () => {
     const files = useSelector(getFilesSelector);
 
+    if (files.length === 0) {
+        return <span className={'empty-files-label'}>{'Folder is empty'}</span>;
+    }
+
     return (
         <div className={'fileList'}>
             <div className={'fileList__header'}>
@@ -16,7 +20,7 @@ const FileList = () => {
                 <div className={'fileList__header__date'}>Date</div>
                 <div className={'fileList__header__size'}>Size</div>
             </div>
-            {files.length === 0 && <span>{'Folder is empty'}</span>}
+
             <TransitionGroup>
                 {files.map((file) => (
                     <CSSTransition

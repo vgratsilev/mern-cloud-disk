@@ -25,6 +25,14 @@
     animation: file-enter 500ms forwards;
 }
 
+.empty-files-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - var(--navbar-height));
+    font-size: 24px;
+}
+
 @keyframes file-enter {
     0% {
         opacity: 0;
