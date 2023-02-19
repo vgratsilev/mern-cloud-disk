@@ -1,10 +1,12 @@
 import axios from 'axios';
 import { addFile, deleteFileAction, setFiles } from 'reducers/fileReducer';
 import { addUploadFile, changeUploadFile, showUploader } from 'reducers/uploadReducer';
+import { hideLoader, showLoader } from 'reducers/appReducer';
 
 export function getFiles(dirID, sort) {
     return async (dispatch) => {
         try {
+            dispatch(showLoader());
             let url = 'http://localhost:5000/api/files';
             if (dirID) {
                 url = `http://localhost:5000/api/files?parent=${dirID}`;
@@ -21,6 +23,8 @@ export function getFiles(dirID, sort) {
             dispatch(setFiles(response.data));
         } catch (e) {
             alert(e.response.data.message);
+        } finally {
+            dispatch(hideLoader());
         }
     };
 }
