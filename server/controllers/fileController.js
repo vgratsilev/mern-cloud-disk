@@ -143,10 +143,22 @@ class FileController {
         } catch (error) {
             if (error.code === 'ENOTEMPTY') {
                 console.log('Delete folder error: folder not empty', error);
-                return response.status(500).json({ message: 'Delete folder error: folder is not empty' });
+                return response.status(400).json({ message: 'Delete folder error: folder is not empty' });
             }
             console.log('Delete file error', error);
             return response.status(500).json({ message: 'Delete file error' });
+        }
+    }
+
+    static async searchFiles(request, response) {
+        try {
+            const searchName = request.query.search;
+            let files = await File.find({ user: request.user.id });
+            files = files.filter((file) => file.name.includes(searchName));
+            return response.json(files);
+        } catch (error) {
+            console.log('Search file error', error);
+            return response.status(500).json({ message: 'Search file error' });
         }
     }
 }

@@ -3,10 +3,33 @@ import Logo from 'assets/img/navbar-logo.svg';
 import './navbar.scss';
 import { NavLink } from 'react-router-dom';
 import { logoutUser } from 'reducers/userReducer';
+import { useEffect, useState } from 'react';
+import { getFiles, searchFiles } from 'actions/file';
+import useDebounce from 'utils/useDebounce';
+
+const isAuthSelector = (state) => state.user.isAuth;
+const currentDirSelector = (state) => state.files.currentDir;
 
 const Navbar = () => {
-    const isAuth = useSelector((state) => state.user.isAuth);
+    const isAuth = useSelector(isAuthSelector);
+    const currentDir = useSelector(currentDirSelector);
     const dispatch = useDispatch();
+
+    const [searchName, setSearchName] = useState('');
+    const debouncedSearchName = useDebounce(searchName, 500);
+
+    const searchNameChangeHandler = (e) => {
+        const value = e.target.value?.trim();
+        setSearchName(value);
+    };
+
+    useEffect(() => {
+        if (debouncedSearchName !== '') {
+            dispatch(searchFiles(debouncedSearchName));
+        } else {
+            dispatch(getFiles(currentDir));
+        }
+    }, [dispatch, debouncedSearchName, currentDir]);
 
     return (
         <div className={'navbar'}>
@@ -22,6 +45,15 @@ const Navbar = () => {
                     />
                     <div className={'navbar__header'}>MERN Cloud</div>
                 </NavLink>
+                {isAuth && (
+                    <input
+                        type={'text'}
+                        className={'navbar__search'}
+                        placeholder={'file name...'}
+                        value={searchName}
+                        onChange={searchNameChangeHandler}
+                    />
+                )}
                 {!isAuth && (
                     <>
                         <div className={'navbar__login'}>
