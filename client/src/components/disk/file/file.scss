@@ -62,3 +62,38 @@
         display: block;
     }
 }
+
+.file-tile {
+    width: 150px;
+    height: 150px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__img {
+        height: 100px;
+        width: 100px;
+    }
+
+    &__name {
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 140px;
+    }
+
+    &__buttons {
+        display: none;
+        margin: 15px 10px;
+
+        .button__delete {
+            margin-left: 10px;
+        }
+    }
+
+    &:hover &__buttons {
+        display: flex;
+    }
+}

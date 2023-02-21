@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFiles, uploadFile } from 'actions/file';
-import { popFromStack, setShowPopup } from 'reducers/fileReducer';
+import { popFromStack, setShowPopup, setView } from 'reducers/fileReducer';
 import FileList from './fileList/FileList';
 import Popup from './Popup/Popup';
-import './disk.scss';
 import Uploader from './uploader/Uploader';
 import { Loader } from '../Loader/Loader';
+import './disk.scss';
 
 const getCurrentDir = (state) => state.files.currentDir;
 const getIsLoading = (state) => state.app.isLoading;
@@ -55,6 +55,14 @@ const Disk = () => {
 
     const sortValueChangeHandler = (e) => {
         setSort(e.target.value);
+    };
+
+    const setListView = () => {
+        dispatch(setView('list'));
+    };
+
+    const setTileView = () => {
+        dispatch(setView('tile'));
     };
 
     if (isLoading) {
@@ -128,6 +136,20 @@ const Disk = () => {
                         <option value={'date'}>by date</option>
                     </select>
                 </label>
+                <button
+                    className={'disk__view view_tile'}
+                    type={'button'}
+                    onClick={setTileView}
+                >
+                    {' '}
+                </button>
+                <button
+                    className={'disk__view view_list'}
+                    type={'button'}
+                    onClick={setListView}
+                >
+                    {' '}
+                </button>
             </div>
             <FileList />
             <Popup />

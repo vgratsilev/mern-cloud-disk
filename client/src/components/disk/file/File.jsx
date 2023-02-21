@@ -2,15 +2,18 @@ import IconDir from 'assets/img/dir.svg';
 import IconFile from 'assets/img/file.svg';
 import IconDownload from 'assets/img/download.svg';
 import IconDelete from 'assets/img/trash.svg';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { pushToStack, setCurrentDir } from 'reducers/fileReducer';
 import { deleteFile, downloadFile } from 'actions/file';
 import sizeFormat from 'utils/sizeFormat';
 import './file.scss';
 
+const getViewSelector = (state) => state.files.view;
+
 const File = (props) => {
     const { file } = props;
     const dispatch = useDispatch();
+    const view = useSelector(getViewSelector);
 
     const openFileHandler = () => {
         if (file.type === 'dir') {
@@ -28,6 +31,53 @@ const File = (props) => {
         event.stopPropagation();
         dispatch(deleteFile(file));
     };
+
+    if (view === 'tile') {
+        return (
+            <div
+                className={'file-tile'}
+                onClick={openFileHandler}
+                title={file.name}
+            >
+                <img
+                    src={file.type === 'dir' ? IconDir : IconFile}
+                    alt={file.name}
+                    className={'file-tile__img'}
+                />
+                <div
+                    className={'file-tile__name'}
+                    title={file.name}
+                >
+                    {file.name}
+                </div>
+                <div className={'file-tile__buttons'}>
+                    {file.type !== 'dir' && (
+                        <button
+                            type={'button'}
+                            onClick={downloadFileHandler}
+                            title={'Download file'}
+                        >
+                            <img
+                                src={IconDownload}
+                                alt={'Download file'}
+                            />
+                        </button>
+                    )}
+                    <button
+                        type={'button'}
+                        className={'button__delete'}
+                        onClick={deleteFileHandler}
+                        title={'Delete file'}
+                    >
+                        <img
+                            src={IconDelete}
+                            alt={'Delete file'}
+                        />
+                    </button>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div

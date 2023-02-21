@@ -5,12 +5,27 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import File from '../file/File';
 
 const getFilesSelector = (state) => state.files.files;
+const getViewSelector = (state) => state.files.view;
 
 const FileList = () => {
     const files = useSelector(getFilesSelector);
+    const view = useSelector(getViewSelector);
 
     if (files.length === 0) {
         return <span className={'empty-files-label'}>{'Folder is empty'}</span>;
+    }
+
+    if (view === 'tile') {
+        return (
+            <div className={'fileTile'}>
+                {files.map((file) => (
+                    <File
+                        key={file._id}
+                        file={file}
+                    />
+                ))}
+            </div>
+        );
     }
 
     return (
