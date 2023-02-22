@@ -7,6 +7,7 @@ const router = new Router();
 router.post('', authMiddleware, FileController.createDir);
 router.get('', authMiddleware, FileController.getFiles);
 router.post('/upload', authMiddleware, FileController.uploadFile);
+router.post('/avatar', authMiddleware, FileController.uploadAvatar);
 router.get('/download', authMiddleware, FileController.downloadFile);
 router.get('/search', authMiddleware, FileController.searchFiles);
 router.delete('/', authMiddleware, FileController.deleteFile);

@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const Uuid = require('uuid');
 const FileService = require('../services/fileService');
 const File = require('../models/File');
 const User = require('../models/User');
@@ -159,6 +160,21 @@ class FileController {
         } catch (error) {
             console.log('Search file error', error);
             return response.status(500).json({ message: 'Search file error' });
+        }
+    }
+
+    static async uploadAvatar(request, response) {
+        try {
+            const { file } = request.files;
+            const user = await User.findById(request.user.id);
+            const avatarName = `${Uuid.v4()}.png`;
+            const filePath = path.join(__dirname, `../static/${avatarName}`);
+            await file.mv(filePath);
+            user.avatar = avatarName;
+            return response.json({ message: 'Avatar was successfully uploaded' });
+        } catch (error) {
+            console.log('Upload avatar error', error);
+            return response.status(500).json({ message: 'Upload avatar error' });
         }
     }
 }

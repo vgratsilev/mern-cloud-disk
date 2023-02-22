@@ -2,6 +2,7 @@
 
 .idea
 files
+static
 
 # dependencies
 **/node_modules
