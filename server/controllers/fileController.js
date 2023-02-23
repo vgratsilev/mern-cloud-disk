@@ -171,10 +171,25 @@ class FileController {
             const filePath = path.join(__dirname, `../static/${avatarName}`);
             await file.mv(filePath);
             user.avatar = avatarName;
-            return response.json({ message: 'Avatar was successfully uploaded' });
+            await user.save();
+            return response.json(user);
         } catch (error) {
             console.log('Upload avatar error', error);
             return response.status(500).json({ message: 'Upload avatar error' });
+        }
+    }
+
+    static async deleteAvatar(request, response) {
+        try {
+            const user = await User.findById(request.user.id);
+            const filePath = path.join(__dirname, `../static/${user.avatar}`);
+            fs.unlinkSync(filePath);
+            user.avatar = null;
+            await user.save();
+            return response.json(user);
+        } catch (error) {
+            console.log('Delete avatar error', error);
+            return response.status(500).json({ message: 'Delete avatar error' });
         }
     }
 }
