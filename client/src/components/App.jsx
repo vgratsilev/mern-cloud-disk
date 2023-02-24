@@ -11,6 +11,7 @@ import './app.scss';
 
 import { auth } from 'actions/user';
 import Disk from './disk/Disk';
+import { Profile } from './profile/Profile';
 
 const App = () => {
     const isAuth = useSelector((state) => state.user.isAuth);
@@ -53,6 +54,10 @@ const App = () => {
                                     exact
                                     path={'/'}
                                     element={<Disk />}
+                                />
+                                <Route
+                                    path={'/profile'}
+                                    element={<Profile />}
                                 />
                                 <Route
                                     path={'*'}
