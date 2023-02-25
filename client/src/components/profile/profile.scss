@@ -1,0 +1,15 @@
+.profile {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+
+    &__delete-avatar {
+        padding: 5px;
+        width: 150px;
+    }
+
+    &__upload_avatar {
+        margin-top: 20px;
+        max-width: 300px;
+    }
+}
